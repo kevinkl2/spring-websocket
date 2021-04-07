@@ -1,0 +1,3 @@
+com\javainuse\websocket\config\Application.class
+com\javainuse\websocket\config\WebSocketConfig.class
+com\javainuse\websocket\config\SocketTextHandler.class
