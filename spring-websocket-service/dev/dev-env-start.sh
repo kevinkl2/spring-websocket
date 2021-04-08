@@ -1,4 +1,5 @@
 #!/bin/bash
+docker rmi $(docker images --filter=reference="dev_*" -q)
 rm -f ./services/*/*.jar
 cd ../
 ./gradlew clean bootJar

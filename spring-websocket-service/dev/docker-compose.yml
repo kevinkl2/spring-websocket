@@ -28,7 +28,7 @@ services:
       - config-server
       - mongodb
     volumes:
-      - ./config/ctp-data-aggregator-service/bootstrap-dev.yml:/config/bootstrap.yml
+      - ./config/websocket/bootstrap-dev.yml:/config/bootstrap.yml
       - ./scripts/app-start.sh:/app-start.sh
     init: true
 
