@@ -1,0 +1,40 @@
+# Docker Compose file Reference (https://docs.docker.com/compose/compose-file/)
+
+version: '3.7'
+
+# Define services
+services:
+  websocket:
+    container_name: websocket
+    build: ./services/websocket
+    ports:
+      - 8080:8080
+    networks:
+      - network
+    depends_on:
+      - mongodb
+    volumes:
+      - ./config/ctp-data-aggregator-service/bootstrap-dev.yml:/config/bootstrap.yml
+      - ./scripts/app-start.sh:/app-start.sh
+    init: true
+
+  mongodb:
+    container_name: mongodb
+    image: mongo:4.2
+    environment:
+      MONGO_INITDB_DATABASE: tf_vehicle_health_report
+    ports:
+      - 27017:27017
+    init: true
+    networks:
+      - network
+    volumes:
+      - ./mongo-seed/seed-mongo.sh:/docker-entrypoint-initdb.d/seed-mongo.sh
+      - ./mongo-seed/placeholder.json:/placeholder.json
+      - $HOME/data/springboot-mongo-tf-data:/data/db
+      - $HOME/data/springboot-mongo-tf-bkp:/data/bkp
+
+# Networks to be created to facilitate communication between containers
+networks:
+  network:
+    driver: bridge
