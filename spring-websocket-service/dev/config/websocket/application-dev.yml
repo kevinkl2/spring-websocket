@@ -1,0 +1,10 @@
+output:
+  ansi:
+    enabled: DETECT
+spring:
+  application:
+    name: websocket
+  data:
+    mongodb:
+      database: chat
+      uri: mongodb://mongodb:27017

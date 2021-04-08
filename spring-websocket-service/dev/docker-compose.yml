@@ -4,6 +4,19 @@ version: '3.7'
 
 # Define services
 services:
+  config-server:
+    container_name: config-server
+    image: hyness/spring-cloud-config-server
+    ports:
+      - 8888:8888
+    networks:
+      - network
+    volumes:
+      - ./config/websocket/application-dev.yml:/config/websocket-dev.yml
+    environment:
+      - SPRING_PROFILES_ACTIVE=native
+    init: true
+
   websocket:
     container_name: websocket
     build: ./services/websocket
@@ -12,6 +25,7 @@ services:
     networks:
       - network
     depends_on:
+      - config-server
       - mongodb
     volumes:
       - ./config/ctp-data-aggregator-service/bootstrap-dev.yml:/config/bootstrap.yml

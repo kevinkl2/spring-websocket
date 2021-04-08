@@ -1,3 +1,10 @@
 spring:
   application:
     name: websocket
+  profiles: dev
+  cloud:
+    config:
+      retry:
+        initialInterval: 5000
+        maxAttempts: 5
+      uri: http://config-server:8888/

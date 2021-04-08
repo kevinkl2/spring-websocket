@@ -1,8 +1,0 @@
-spring:
-    data:
-        mongodb:
-            database: chat
-            uri: mongodb://mongodb:27017
-    cloud:
-        config:
-            enabled: false
