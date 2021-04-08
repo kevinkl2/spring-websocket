@@ -1,7 +1,7 @@
 #!/bin/bash
 rm -f ./services/*/*.jar
 cd ../
-./gradle clean bootJar
+./gradlew clean bootJar
 cp build/libs/*.jar dev/services/websocket
 cd dev
 
