@@ -67,6 +67,8 @@ public class ChatService extends TextWebSocketHandler {
       return;
     }
 
+    formatAndSendResponse(session, user, nextNode, "");
+
     user.setNodeId(nextNode.getId());
 
     userHandler.save(user);
