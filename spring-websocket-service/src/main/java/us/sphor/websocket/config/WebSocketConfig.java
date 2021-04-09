@@ -1,17 +1,19 @@
-package us.sphor.websocket;
+package us.sphor.websocket.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
+import us.sphor.websocket.SocketTextHandler;
 
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
+  @Autowired private SocketTextHandler socketTextHandler;
+
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    registry
-        .addHandler(new SocketTextHandler(), "/user")
-        .setAllowedOrigins("https://dadmin.sphor.us");
+    registry.addHandler(socketTextHandler, "/user").setAllowedOrigins("https://dadmin.sphor.us");
   }
 }
