@@ -22,7 +22,7 @@ function disconnect() {
 
 function sendData() {
 	var data = JSON.stringify({
-	    'userId' : $("#userId").val()
+	    'userId' : $("#userId").val(),
 		'input' : $("#input").val()
 	})
 	ws.send(data);
