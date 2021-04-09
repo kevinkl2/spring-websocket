@@ -26,7 +26,7 @@ public class SocketTextHandler extends TextWebSocketHandler {
 
     Input input = new ObjectMapper().readValue(message.getPayload(), Input.class);
 
-    Node queryResult = Node.builder().build();
+    Node queryResult = null;
 
     try {
       queryResult = chatNodeRepository.findById(input.getUser()).get();
@@ -35,6 +35,10 @@ public class SocketTextHandler extends TextWebSocketHandler {
       session.sendMessage(new TextMessage("NOT FOUND"));
     }
 
-    session.sendMessage(new TextMessage(new ObjectMapper().writeValueAsString(queryResult)));
+    if (queryResult == null) {
+      session.sendMessage(new TextMessage("NOT FOUND"));
+    } else {
+      session.sendMessage(new TextMessage(new ObjectMapper().writeValueAsString(queryResult)));
+    }
   }
 }
