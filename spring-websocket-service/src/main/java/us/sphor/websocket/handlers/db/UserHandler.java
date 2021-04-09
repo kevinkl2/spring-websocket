@@ -13,7 +13,7 @@ public class UserHandler {
 
   private final UserRepository userRepository;
 
-  public User createNewUser(User user) {
+  public User save(User user) {
     try {
       return userRepository.save(user);
     } catch (RuntimeException runtimeException) {

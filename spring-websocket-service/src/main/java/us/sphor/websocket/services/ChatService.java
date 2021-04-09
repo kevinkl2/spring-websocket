@@ -45,14 +45,41 @@ public class ChatService extends TextWebSocketHandler {
       formatAndSendResponse(session, user, node, "");
       return;
     }
+
+    Node node = nodeHandler.get(user.getNodeId());
+
+    if (Objects.isNull(node)) {
+      formatAndSendResponse(session, user, null, "NODE NOT FOUND");
+      return;
+    }
+
+    if (Objects.isNull(input.getInput())
+        || input.getInput().isEmpty()
+        || !node.getOptions().containsKey(input.getInput())) {
+      formatAndSendResponse(session, user, node, "INVALID RESPONSE");
+      return;
+    }
+
+    Node nextNode = nodeHandler.get(node.getOptions().get(input.getInput()));
+
+    if (Objects.isNull(nextNode)) {
+      formatAndSendResponse(session, user, null, "NODE NOT FOUND");
+      return;
+    }
+
+    user.setNodeId(nextNode.getId());
+
+    userHandler.save(user);
+
+    return;
   }
 
   private User createNewUser(String userId) {
-    User user = User.builder().nodeId("6070147865d3044b6a511532").build();
+    User user = User.builder().nodeId("6070e20b951c2963f38bffdb").build();
     if (!(userId.isEmpty())) {
       user.setId(userId);
     }
-    return userHandler.createNewUser(user);
+    return userHandler.save(user);
   }
 
   private void formatAndSendResponse(WebSocketSession session, User user, Node node, String error)
