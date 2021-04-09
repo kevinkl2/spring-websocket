@@ -26,16 +26,12 @@ public class SocketTextHandler extends TextWebSocketHandler {
 
     Input input = new ObjectMapper().readValue(message.getPayload(), Input.class);
 
-    Node queryResult;
+    Node queryResult = Node.builder().build();
 
     try {
       queryResult = chatNodeRepository.findById(input.getUser()).get();
     } catch (RuntimeException runtimeException) {
       log.error("saveNode ERROR: ", runtimeException.toString());
-      throw runtimeException;
-    }
-
-    if (queryResult == null) {
       session.sendMessage(new TextMessage("NOT FOUND"));
     }
 
