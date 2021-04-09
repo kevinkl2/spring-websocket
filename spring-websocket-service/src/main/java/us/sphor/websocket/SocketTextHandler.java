@@ -18,7 +18,8 @@ public class SocketTextHandler extends TextWebSocketHandler {
       throws InterruptedException, IOException, JSONException {
 
     Input input = new ObjectMapper().readValue(message.getPayload(), Input.class);
-    session.sendMessage(new ObjectMapper().convertValue(Node.builder().build(), TextMessage.class));
+    Node node = Node.builder().response("test123").build();
+    session.sendMessage(new TextMessage(new ObjectMapper().writeValueAsString(node)));
     session.sendMessage(new TextMessage("Hi " + input.getUser() + " how may we help you?"));
   }
 }
