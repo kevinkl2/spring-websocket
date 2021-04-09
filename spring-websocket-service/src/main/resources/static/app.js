@@ -7,7 +7,7 @@ function setConnected(connected) {
 function connect() {
 	ws = new WebSocket('wss://dadmin.sphor.us/chat');
 	ws.onmessage = function(data) {
-		helloWorld(data.data);
+		response(data.data);
 	}
 	setConnected(true);
 }
@@ -28,9 +28,13 @@ function sendData() {
 	ws.send(data);
 }
 
-function helloWorld(message) {
+function response(message) {
     var data = JSON.parse(message);
-	$("#helloworldmessage").append("<tr><td> " + message + "</td></tr>");
+	$("#response").append("<tr><td> " + data.userId + "</td></tr>");
+	$("#response").append("<tr><td> " + data.node + "</td></tr>");
+	$("#response").append("<tr><td> " + data.options + "</td></tr>");
+	$("#response").append("<tr><td> " + data.error + "</td></tr>");
+	$("#response").append("<tr><td> </td></tr>");
 	$("#userId").val(data.userId);
     console.log(data);
 }
