@@ -16,7 +16,7 @@ public class ChatController {
 
   @PostMapping()
   @ResponseStatus(code = HttpStatus.CREATED)
-  public String saveNode(@RequestBody Node node) {
+  public Node saveNode(@RequestBody Node node) {
 
     Node queryResult = Node.builder().build();
 
@@ -26,6 +26,6 @@ public class ChatController {
       log.error("saveNode ERROR: ", runtimeException.toString());
     }
 
-    return queryResult.toString();
+    return queryResult;
   }
 }
