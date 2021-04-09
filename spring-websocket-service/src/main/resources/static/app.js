@@ -31,7 +31,7 @@ function sendData() {
 function helloWorld(message) {
     var data = JSON.parse(message);
 	$("#helloworldmessage").append("<tr><td> " + message + "</td></tr>");
-	$("#userId").val() = data.userId;
+	$("#userId").val(data.userId);
     console.log(data);
 }
 
