@@ -20,4 +20,12 @@ public class UserHandler {
       return null;
     }
   }
+
+  public User get(String userId) {
+    try {
+      return userRepository.findById(userId).get();
+    } catch (RuntimeException runtimeException) {
+      return null;
+    }
+  }
 }

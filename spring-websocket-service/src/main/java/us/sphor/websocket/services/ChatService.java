@@ -31,9 +31,9 @@ public class ChatService extends TextWebSocketHandler {
 
     Input input = new ObjectMapper().readValue(message.getPayload(), Input.class);
 
-    User user;
+    User user = userHandler.get(input.getUserId());
 
-    if (Objects.isNull(input.getUserId()) || input.getUserId().isEmpty()) {
+    if (Objects.isNull(input.getUserId()) || input.getUserId().isEmpty() || Objects.isNull(user)) {
       user = createNewUser("");
       Node node = nodeHandler.get(user.getNodeId());
 
@@ -43,6 +43,7 @@ public class ChatService extends TextWebSocketHandler {
       }
 
       formatAndSendResponse(session, user, node, "");
+      return;
     }
   }
 
