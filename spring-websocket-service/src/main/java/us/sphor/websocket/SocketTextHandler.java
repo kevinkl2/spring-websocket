@@ -3,12 +3,13 @@ package us.sphor.websocket;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import org.json.JSONException;
-import org.json.JSONObject;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import us.sphor.websocket.model.Input;
+import us.sphor.websocket.repository.entities.Node;
 
 @Component
 public class SocketTextHandler extends TextWebSocketHandler {
@@ -17,10 +18,9 @@ public class SocketTextHandler extends TextWebSocketHandler {
   public void handleTextMessage(WebSocketSession session, TextMessage message)
       throws InterruptedException, IOException, JSONException {
 
-    String payload = message.getPayload();
-    Input input = new ObjectMapper().readValue(payload, Input.class);
-    System.out.println(input.toString());
-    JSONObject jsonObject = new JSONObject(payload);
-    session.sendMessage(new TextMessage("Hi " + jsonObject.get("user") + " how may we help you?"));
+    Input input = new ObjectMapper().readValue(message.getPayload(), Input.class);
+    WebSocketMessage<Node> node = (WebSocketMessage<Node>) Node.builder().build();
+    session.sendMessage(node);
+    session.sendMessage(new TextMessage("Hi " + input.getUser() + " how may we help you?"));
   }
 }
