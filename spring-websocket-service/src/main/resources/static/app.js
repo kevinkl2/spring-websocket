@@ -5,7 +5,7 @@ function setConnected(connected) {
 }
 
 function connect() {
-	ws = new WebSocket('wss://dadmin.sphor.us/user');
+	ws = new WebSocket('wss://dadmin.sphor.us/chat');
 	ws.onmessage = function(data) {
 		helloWorld(data.data);
 	}
@@ -22,7 +22,8 @@ function disconnect() {
 
 function sendData() {
 	var data = JSON.stringify({
-		'user' : $("#user").val()
+	    'userId' : $("#userId").val()
+		'input' : $("#input").val()
 	})
 	ws.send(data);
 }

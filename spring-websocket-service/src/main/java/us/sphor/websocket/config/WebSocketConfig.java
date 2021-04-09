@@ -5,15 +5,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
-import us.sphor.websocket.SocketTextHandler;
+import us.sphor.websocket.services.ChatService;
 
 @Configuration
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-  @Autowired private SocketTextHandler socketTextHandler;
+  @Autowired private ChatService chatService;
 
   public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    registry.addHandler(socketTextHandler, "/user").setAllowedOrigins("https://dadmin.sphor.us");
+    registry.addHandler(chatService, "/chat").setAllowedOrigins("https://dadmin.sphor.us");
   }
 }
