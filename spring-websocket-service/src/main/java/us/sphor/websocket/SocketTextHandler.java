@@ -5,7 +5,6 @@ import java.io.IOException;
 import org.json.JSONException;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 import us.sphor.websocket.model.Input;
@@ -19,8 +18,7 @@ public class SocketTextHandler extends TextWebSocketHandler {
       throws InterruptedException, IOException, JSONException {
 
     Input input = new ObjectMapper().readValue(message.getPayload(), Input.class);
-    WebSocketMessage<Node> node = (WebSocketMessage<Node>) Node.builder().build();
-    session.sendMessage(node);
+    session.sendMessage(new ObjectMapper().convertValue(Node.builder().build(), TextMessage.class));
     session.sendMessage(new TextMessage("Hi " + input.getUser() + " how may we help you?"));
   }
 }
