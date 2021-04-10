@@ -31,7 +31,7 @@ function sendData() {
 function response(message) {
     var data = JSON.parse(message);
 	$("#response").append("<tr><td> userId: " + data.userId + "</td></tr>");
-	$("#response").append("<tr><td> nodeId: " + JSON.stringify(data.node.id) + "</td></tr>");
+	$("#response").append("<tr><td> nodeId: " + data.node.id + "</td></tr>");
 	$("#response").append("<tr><td> response: " + JSON.stringify(data.node.response) + "</td></tr>");
 	if (Object.keys(data.node.options).length) {
 	    $("#response").append("<tr><td> options: " + JSON.stringify(data.node.options) + "</td></tr>");
