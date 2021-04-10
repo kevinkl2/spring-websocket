@@ -39,7 +39,7 @@ function response(message) {
     if (data.error.length) {
         $("#response").append("<tr><td> " + data.error + "</td></tr>");
     }
-	$("#response").append("<tr><td bgcolor="#FFFFFF" style="line-height:30px;" colspan="3">&nbsp;</td></tr>");
+	$("#response").append("<tr><td bgcolor=\"#FFFFFF\" style=\"line-height:30px;\" colspan=\"3\">&nbsp;</td></tr>");
 	$("#userId").val(data.userId);
     console.log(data);
 }
