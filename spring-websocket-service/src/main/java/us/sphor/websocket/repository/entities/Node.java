@@ -7,6 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "nodes")
@@ -19,4 +20,5 @@ public class Node {
   @Id private String id;
   private String response;
   private Map<String, String> options;
+  @Indexed private Boolean startingNode;
 }
