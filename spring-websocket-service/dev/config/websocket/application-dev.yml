@@ -8,3 +8,4 @@ spring:
     mongodb:
       database: chat
       uri: mongodb://mongodb:27017
+      auto-index-creation: true
