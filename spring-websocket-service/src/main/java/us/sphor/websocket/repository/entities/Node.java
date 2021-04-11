@@ -20,5 +20,7 @@ public class Node {
   @Id private String id;
   private String response;
   private Map<String, String> options;
-  @Indexed private Boolean startingNode;
+
+  @Indexed(unique = true)
+  private Boolean startingNode;
 }
