@@ -21,6 +21,6 @@ public class Node {
   private String response;
   private Map<String, String> options;
 
-  @Indexed(unique = true, partialFilter = "{startingNode: {$exists: true}")
+  @Indexed(unique = true, partialFilter = "{'startingNode': {'$exists': true}")
   private Boolean startingNode;
 }
